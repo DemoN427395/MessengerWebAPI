@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: rabbitmq
+    ports:
+      - '5552:5552'
+      - '15672:15672'
+      - '5672:5672'
+    environment:
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '-rabbitmq_stream advertised_host localhost'
+    command: >
+      sh -c "rabbitmq-plugins enable rabbitmq_stream &&
+             rabbitmq-server"
